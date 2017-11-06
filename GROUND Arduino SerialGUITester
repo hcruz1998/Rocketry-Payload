@@ -1,0 +1,46 @@
+#include <SoftwareSerial.h>
+#include <stdlib.h>
+
+//CODE IS USEFUL ONLY FOR TESTING SERIAL TRANSMISSION. 
+//CODE GENERATES RANDOM VALUES AND PRINTS THEM TO SERIAL TO BE READ INTO THE GUI.
+
+
+float timeMil;
+float ax;
+float ay;
+float az;
+float velocity;
+float roll;
+float pitch;
+float heading;
+float altitudeBarometer;
+float altitudeGPS;
+float latitude;
+float longitude;
+float deltatime;
+
+void setup() {
+  Serial.begin(9600);
+  timeMil = 0;
+  deltatime = 100;
+  parameters = "Hello!";
+}
+
+void loop() {
+  
+  timeMil = timeMil + deltatime;
+  ax = random(1,12);
+  ay = random(1,12);
+  az = random(1,12);
+  roll = random(1,12);
+  pitch = random(1,12);
+  heading = random(1,12);
+  altitudeBarometer = random(1,12);
+  altitudeGPS = random(1,12);
+  velocity = random(1,12);
+  latitude = random(40000000,41000000);
+  longitude = random(-75000000, -74000000);
+  
+  Serial.print("*#" + String(ax) + "#,#"+ String(ay) + "#,#"+ String(az) + "#,#"+ String(roll) + "#,#"+ String(pitch) + "#,#"+ String(heading) + "#,#"+ String(altitudeBarometer) + "#,#"+ String(altitudeGPS) + "#,#"+ String(velocity) + "#,#"+ String(latitude/1000000) + "#,#"+ String(longitude/1000000) + "#,#"+ String(timeMil/1000)+ "#&");
+  delay(deltatime);
+}
